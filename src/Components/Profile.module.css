@@ -1,0 +1,12 @@
+.Dashboard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+@media (max-width: 720px) {
+  .Dashboard {
+    font-size: 100%;
+  }
+}
