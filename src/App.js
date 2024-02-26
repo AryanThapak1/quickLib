@@ -5,6 +5,7 @@ import Profile from "./Components/Profile";
 import HomePage from "./Components/Homepage";
 import Signup from "./Components/SignUp";
 import Login from "./Components/Login";
+import SearchPage from "./Components/SearchPage";
 
 function App() {
   const router = createBrowserRouter([
@@ -27,6 +28,10 @@ function App() {
         {
           path: "Signup",
           element: <Signup />,
+        },
+        {
+          path: "Search-Book",
+          element: <SearchPage />,
         },
       ],
     },

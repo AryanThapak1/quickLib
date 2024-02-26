@@ -1,4 +1,5 @@
 import image from "./../Items/QuickLib logo1.png";
+import sideImage from "./../Items/6310507.jpg";
 import Input from "../utils/Input";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -69,47 +70,56 @@ export default function Signup() {
 
   return (
     <>
-      <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-          <img className="mx-auto h-10 w-auto" src={image} alt="Your Company" />
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            Sign Up your account
-          </h2>
+      <div className="flex">
+        <div className="w-[50%] hidden md:block">
+          <img src={sideImage} />
         </div>
+        <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 ">
+          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+            <img
+              className="mx-auto h-10 w-auto"
+              src={image}
+              alt="Your Company"
+            />
+            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+              Sign Up your account
+            </h2>
+          </div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" onSubmit={onSubmitHandler}>
-            {formTags.map((el) => (
-              <Input
-                htmlFor={el}
-                labelClasses="block text-sm font-medium leading-6 text-gray-900"
-                inputClasses="block w-full rounded-md border-0 px-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                type={
-                  el === "Email"
-                    ? "email"
-                    : el.includes("Password")
-                    ? "password"
-                    : "text"
-                }
-                ref={refs[el.split(" ").join("").toLowerCase()]}
-                key={el}
-              />
-            ))}
-            {matchPassword && (
-              <p className="text-[red]">Passwords Dont Match</p>
-            )}
-            {shortLength && (
-              <p className="text-[red]">Passwords length is short</p>
-            )}
-            <div>
-              <button
-                type="submit"
-                className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Sign up
-              </button>
-            </div>
-          </form>
+          <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <form className="space-y-6" onSubmit={onSubmitHandler}>
+              {formTags.map((el) => (
+                <Input
+                  htmlFor={el}
+                  labelClasses="block text-sm font-medium leading-6 text-gray-900"
+                  inputClasses="block w-full rounded-md border-0 px-4 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                  type={
+                    el === "Email"
+                      ? "email"
+                      : el.includes("Password")
+                      ? "password"
+                      : "text"
+                  }
+                  ref={refs[el.split(" ").join("").toLowerCase()]}
+                  key={el}
+                />
+              ))}
+              {matchPassword && (
+                <p className="text-[red]">Passwords Dont Match</p>
+              )}
+              {shortLength && (
+                <p className="text-[red]">Passwords length is short</p>
+              )}
+              <div>
+                <button
+                  type="submit"
+                  className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Sign up
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </>
