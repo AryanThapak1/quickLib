@@ -1,14 +1,34 @@
 import MiniProfile from "../utils/MiniProfile";
 import image from "./../Items/account.png";
+
 export default function Profile() {
-  const headers = ["Full Name", "Role", "Branch", "Session", "Email"];
+  const headers = [
+    "Full Name",
+    "Role",
+    "Branch",
+    "Session",
+    "Email",
+    "Enrollment No",
+  ];
   const data = {
     fullname: "Aryan Thapak",
     role: "Student",
     branch: "CSE",
     session: "2020-2024",
     email: "aryanthapak.8@gmail.com",
+    enrollmentno: "0827CS210046",
   };
+
+  const token = sessionStorage.getItem("token");
+  const fetchData = async () => {
+    const response = await fetch("", {
+      method: "GET",
+      headers: {
+        Authentication: `Bearer ${token}`,
+      },
+    });
+  };
+
   return (
     <div className="mx-[10%] my-[5%]">
       <div className="px-4 sm:px-0">
@@ -19,8 +39,8 @@ export default function Profile() {
           Personal details
         </p>
       </div>
-      <div className="w-full md:w-[160px] mx-auto">
-        <img src={image} className="mx-auto" alt="Profile" />
+      <div className="w-full md:w-[10%] mx-auto">
+        <img src={image} className="mx-auto max-w-full h-auto" alt="Profile" />
       </div>
       <div>
         <input type="file" />
@@ -29,8 +49,9 @@ export default function Profile() {
         <dl className="divide-y divide-gray-100">
           {headers.map((el) => (
             <MiniProfile
+              key={el}
               title={el}
-              text={data[el.split(" ").join().toLowerCase()]}
+              text={data[el.split(" ").join("").toLowerCase()]}
             />
           ))}
         </dl>

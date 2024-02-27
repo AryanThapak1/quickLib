@@ -33,10 +33,11 @@ export default function Signup() {
   const onSubmitHandler = async (event) => {
     event.preventDefault();
     const data = {
-      fullName: nameRef.current.value,
+      Name: nameRef.current.value,
       email: emailRef.current.value,
       password: passwordRef.current.value,
       college: collegeRef.current.value,
+      role: "Admin",
     };
 
     if (data.password.length < 8) {
@@ -51,7 +52,7 @@ export default function Signup() {
     }
 
     const response = await fetch(
-      "https://quicklib-f7fe6-default-rtdb.firebaseio.com/credentials.json",
+      "http://localhost:8000/api/v1/user",
       {
         method: "POST",
         body: JSON.stringify(data),
@@ -72,7 +73,7 @@ export default function Signup() {
     <>
       <div className="flex">
         <div className="w-[50%] hidden md:block">
-          <img src={sideImage} />
+          <img src={sideImage} alt="illustration" />
         </div>
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 ">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">

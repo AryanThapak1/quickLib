@@ -17,7 +17,7 @@ export default function Login() {
       password: PasswordRef.current.value,
     };
 
-    const response = await fetch("", {
+    const response = await fetch("http://localhost:8000/api/v1/user/login", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -25,10 +25,16 @@ export default function Login() {
       },
     });
 
+
     if (!response.ok) {
       setWrongPassword(true);
       return;
     }
+
+    const processedData=await response.json();
+    const token=processedData.token;
+
+    sessionStorage.setItem('token',token);
 
     setTimeout(() => {
       navigate("/Profile");
@@ -38,7 +44,7 @@ export default function Login() {
     <>
       <div className="flex">
         <div className="w-[50%] hidden md:block">
-          <img src={sideImage} />
+          <img src={sideImage} alt='illustration'/>
         </div>
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
