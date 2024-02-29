@@ -33,8 +33,9 @@ export default function Login() {
 
     const processedData=await response.json();
     const token=processedData.token;
-
+    const role=processedData.role;
     sessionStorage.setItem('token',token);
+    sessionStorage.setItem('role',role);
 
     setTimeout(() => {
       navigate("/Profile");
