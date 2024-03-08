@@ -61,7 +61,7 @@ export default function Profile() {
             <MiniProfile
               key={el}
               title={el}
-              text={data[el.split(" ").join("").toLowerCase()]}
+              text={profileData[el.split(" ").join("").toLowerCase()]}
             />
           ))}
         </dl>
