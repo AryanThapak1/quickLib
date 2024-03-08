@@ -1,7 +1,9 @@
 import MiniProfile from "../utils/MiniProfile";
 import image from "./../Items/account.png";
+import { useEffect, useState } from "react";
 
 export default function Profile() {
+  const [profileData, setProfileData] = useState({});
   const headers = [
     "Full Name",
     "Role",
@@ -27,7 +29,15 @@ export default function Profile() {
         Authentication: `Bearer ${token}`,
       },
     });
+
+    const userData = await response.json();
+
+    setProfileData((prevState) => userData);
   };
+
+  useEffect(()=>{
+    fetchData();
+  })
 
   return (
     <div className="mx-[10%] my-[5%]">
@@ -51,7 +61,7 @@ export default function Profile() {
             <MiniProfile
               key={el}
               title={el}
-              text={data[el.split(" ").join("").toLowerCase()]}
+              text={profileData[el.split(" ").join("").toLowerCase()]}
             />
           ))}
         </dl>
