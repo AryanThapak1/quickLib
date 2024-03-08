@@ -35,12 +35,12 @@ export default function Profile() {
     setProfileData((prevState) => userData);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     fetchData();
-  })
+  });
 
   return (
-    <div className="mx-[10%] my-[5%]">
+    <div className="mx-[10%] my-[5%] overflow-hidden">
       <div className="px-4 sm:px-0">
         <h3 className="text-base font-semibold leading-7 text-gray-900">
           Student Information
@@ -49,7 +49,7 @@ export default function Profile() {
           Personal details
         </p>
       </div>
-      <div className="w-full md:w-[10%] mx-auto">
+      <div className="w-[50%] md:w-[10%] mx-auto">
         <img src={image} className="mx-auto max-w-full h-auto" alt="Profile" />
       </div>
       <div>
@@ -61,7 +61,7 @@ export default function Profile() {
             <MiniProfile
               key={el}
               title={el}
-              text={profileData[el.split(" ").join("").toLowerCase()]}
+              text={data[el.split(" ").join("").toLowerCase()]}
             />
           ))}
         </dl>
