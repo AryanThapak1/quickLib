@@ -52,7 +52,7 @@ export default function Signup() {
     }
 
     const response = await fetch(
-      "http://localhost:8000/api/v1/user",
+      "http://localhost:8000/api/v1/user/Signup",
       {
         method: "POST",
         body: JSON.stringify(data),

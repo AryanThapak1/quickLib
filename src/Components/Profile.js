@@ -23,21 +23,21 @@ export default function Profile() {
 
   const token = sessionStorage.getItem("token");
   const fetchData = async () => {
-    const response = await fetch("", {
+    const response = await fetch("http://localhost:8000/api/v1/profile", {
       method: "GET",
       headers: {
-        Authentication: `Bearer ${token}`,
+        Authentication: `Bearer ${token}`
       },
     });
 
     const userData = await response.json();
-
+    console.log(userData);
     setProfileData((prevState) => userData);
   };
 
   useEffect(() => {
     fetchData();
-  });
+  },[]);
 
   return (
     <div className="mx-[10%] my-[5%] overflow-hidden">
@@ -61,7 +61,7 @@ export default function Profile() {
             <MiniProfile
               key={el}
               title={el}
-              text={data[el.split(" ").join("").toLowerCase()]}
+              text={profileData[el.split(" ").join("").toLowerCase()]}
             />
           ))}
         </dl>
