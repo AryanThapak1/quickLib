@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import image from "./../Items/QuickLib logo1.png";
 
 function classNames(...classes) {
@@ -9,25 +9,35 @@ function classNames(...classes) {
 }
 
 export default function Example() {
+  const location = useLocation();
   const token = sessionStorage.getItem("token");
   let navigation = [
-    { name: "Home", href: "/home", current: true },
-    { name: "Login", href: "/login", current: false },
+    { name: "Home", href: "/home", current: location.pathname === "/Home" },
+    { name: "Login", href: "/login", current: location.pathname === "/login" },
   ];
 
   if (token) {
     navigation = [
-      { name: "Dashboard", href: "/Profile", current: true },
-      { name: "Search Books", href: "Search-book", current: false },
+      {
+        name: "Dashboard",
+        href: "/Profile",
+        current: location.pathname === "/Profile",
+      },
+      {
+        name: "Search Books",
+        href: "Search-book",
+        current: location.pathname === "/Search-book",
+      },
     ];
 
-    if(sessionStorage.getItem("role")==="Admin"){
-      navigation.push(
-        { name: "Add Data", href: "/addData", current: false }
-      )
+    if (sessionStorage.getItem("role") === "Admin") {
+      navigation.push({
+        name: "Add Data",
+        href: "/addData",
+        current: location.pathname === "/addData",
+      });
+    }
   }
-  }
-
 
   const navigate = useNavigate();
   const logoutHandler = () => {
@@ -184,4 +194,3 @@ export default function Example() {
     </Disclosure>
   );
 }
-

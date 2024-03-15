@@ -12,15 +12,7 @@ export default function Profile() {
     "Email",
     "Enrollment No",
   ];
-  const data = {
-    fullname: "Aryan Thapak",
-    role: "Student",
-    branch: "CSE",
-    session: "2020-2024",
-    email: "aryanthapak.8@gmail.com",
-    enrollmentno: "0827CS210046",
-  };
-
+ 
   const token = sessionStorage.getItem("token");
   const fetchData = async () => {
     const response = await fetch("http://localhost:8000/api/v1/profile", {
