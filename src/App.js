@@ -7,6 +7,7 @@ import Signup from "./Components/SignUp";
 import Login from "./Components/Login";
 import SearchPage from "./Components/SearchPage";
 import BookData from "./utils/BookData";
+import Requests from "./Components/Requests";
 
 function App() {
   const router = createBrowserRouter([
@@ -37,6 +38,10 @@ function App() {
         {
           path: "Search-Book/:id",
           element: <BookData />,
+        },
+        {
+          path: "/requests",
+          element: <Requests />,
         },
       ],
     },

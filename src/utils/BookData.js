@@ -1,12 +1,15 @@
-import { Navigate, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import image from "../Items/download.png";
 
 const BookData = (props) => {
   const [bookDetails, setDetails] = useState({});
   const [isLoading, setLoading] = useState(true);
+  const [isPresent, setisPresent] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
+  const token = sessionStorage.getItem("token");
+
   const fetchData = async () => {
     try {
       const response = await fetch(
@@ -21,6 +24,23 @@ const BookData = (props) => {
     } catch (error) {
       console.error("Error fetching book data:", error);
     }
+  };
+
+  const onIssueHandler = async () => {
+    const response = await fetch(
+      `http://localhost:8000/api/v1/books/requestBook?id=${id}`,
+      {
+        method: "POST",
+        headers: {
+          Authentication: `Bearer ${token}`,
+        },
+      }
+    );
+    if (!response.ok) {
+      setisPresent(true);
+      return;
+    }
+    navigate("/requests");
   };
 
   const backToSearchHandler = () => {
@@ -44,7 +64,12 @@ const BookData = (props) => {
         <h1 className="text-2xl font-bold mb-2">{bookDetails.Name}</h1>
         <h2 className="text-lg mb-2">By {bookDetails.author}</h2>
         <p className="text-gray-700 mb-4 ">{bookDetails.description}</p>
-        <button className=" bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded mb-2">
+        <p className="text-gray-700 mb-4 ">Qty:x{bookDetails.qty}</p>
+
+        <button
+          className=" bg-teal-500 hover:bg-teal-700 text-white font-bold py-2 px-4 rounded mb-2"
+          onClick={onIssueHandler}
+        >
           Issue Book
         </button>
         <button
@@ -53,6 +78,9 @@ const BookData = (props) => {
         >
           Back to Search
         </button>
+        {isPresent && (
+          <p className="text-red-600 ">Already Requested for this book</p>
+        )}
       </div>
     </div>
   );

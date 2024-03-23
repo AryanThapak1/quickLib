@@ -28,9 +28,12 @@ export default function Example() {
         href: "Search-book",
         current: location.pathname === "/Search-book",
       },
+      {
+        name: "Requests",
+        href: "requests",
+        current: location.pathname === "/requests",
+      },
     ];
-
-    
   }
 
   const navigate = useNavigate();
