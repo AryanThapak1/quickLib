@@ -6,7 +6,7 @@ import HomePage from "./Components/Homepage";
 import Signup from "./Components/SignUp";
 import Login from "./Components/Login";
 import SearchPage from "./Components/SearchPage";
-import DataUpload from "./Components/DataUpload";
+import BookData from "./utils/BookData";
 
 function App() {
   const router = createBrowserRouter([
@@ -35,8 +35,8 @@ function App() {
           element: <SearchPage />,
         },
         {
-          path: "addData",
-          element: <DataUpload />,
+          path: "Search-Book/:id",
+          element: <BookData />,
         },
       ],
     },

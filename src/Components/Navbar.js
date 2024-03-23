@@ -30,13 +30,7 @@ export default function Example() {
       },
     ];
 
-    if (sessionStorage.getItem("role") === "Admin") {
-      navigation.push({
-        name: "Add Data",
-        href: "/addData",
-        current: location.pathname === "/addData",
-      });
-    }
+    
   }
 
   const navigate = useNavigate();
