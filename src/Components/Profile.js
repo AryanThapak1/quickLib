@@ -15,7 +15,7 @@ export default function Profile() {
  
   const token = sessionStorage.getItem("token");
   const fetchData = async () => {
-    const response = await fetch("http://localhost:8000/api/v1/profile", {
+    const response = await fetch("http://localhost:8000/api/v1/user/profile", {
       method: "GET",
       headers: {
         Authentication: `Bearer ${token}`

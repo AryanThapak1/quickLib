@@ -3,7 +3,7 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import image from "./../Items/QuickLib logo1.png";
-
+import account from "./../Items/account.png";
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -11,6 +11,7 @@ function classNames(...classes) {
 export default function Example() {
   const location = useLocation();
   const token = sessionStorage.getItem("token");
+  const role = sessionStorage.getItem("role");
   let navigation = [
     { name: "Home", href: "/home", current: location.pathname === "/Home" },
     { name: "Login", href: "/login", current: location.pathname === "/login" },
@@ -18,11 +19,6 @@ export default function Example() {
 
   if (token) {
     navigation = [
-      {
-        name: "Dashboard",
-        href: "/Profile",
-        current: location.pathname === "/Profile",
-      },
       {
         name: "Search Books",
         href: "Search-book",
@@ -34,6 +30,20 @@ export default function Example() {
         current: location.pathname === "/requests",
       },
     ];
+
+    if (role === "Admin") {
+      navigation.push({
+        name: "Dashboard",
+        href: "/Profile",
+        current: location.pathname === "/Profile",
+      });
+
+      navigation.push({
+        name: "Student",
+        href: "/Student",
+        current: location.pathname === "/Student",
+      });
+    }
   }
 
   const navigate = useNavigate();
@@ -105,7 +115,7 @@ export default function Example() {
                         <span className="sr-only">Open user menu</span>
                         <img
                           className="h-8 w-8 rounded-full"
-                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          src={account}
                           alt=""
                         />
                       </Menu.Button>

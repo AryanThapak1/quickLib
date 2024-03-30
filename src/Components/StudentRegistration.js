@@ -2,15 +2,18 @@ import image from "./../Items/QuickLib logo1.png";
 import sideImage from "./../Items/6310507.jpg";
 import Input from "../utils/Input";
 import { useRef, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export default function Signup() {
+export default function StudentRegistration() {
   const formTags = [
     "Full Name",
     "Email",
     "Password",
     "Confirm Password",
     "College",
+    "Enrollment",
+    "Session",
+    "Branch",
   ];
 
   const navigate = useNavigate();
@@ -21,6 +24,9 @@ export default function Signup() {
   const collegeRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
+  const enrollmentRef = useRef();
+  const branchRef=useRef();
+  const sessionRef=useRef();
 
   const refs = {
     fullname: nameRef,
@@ -28,6 +34,9 @@ export default function Signup() {
     college: collegeRef,
     password: passwordRef,
     confirmpassword: confirmPasswordRef,
+    enrollment: enrollmentRef,
+    branch:branchRef,
+    session:sessionRef
   };
 
   const onSubmitHandler = async (event) => {
@@ -37,7 +46,10 @@ export default function Signup() {
       email: emailRef.current.value,
       password: passwordRef.current.value,
       college: collegeRef.current.value,
-      role: "Admin",
+      Enrollment_Number:enrollmentRef.current.value,
+      branch:branchRef.current.value,
+      session:sessionRef.current.value,
+      role: "Student",
     };
 
     if (data.password.length < 8) {
@@ -117,14 +129,6 @@ export default function Signup() {
                 </button>
               </div>
             </form>
-            <p className="mt-5 text-center text-sm text-gray-500">
-              <Link
-                to="/StudentRegistration"
-                className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
-              >
-                Are you a student ?
-              </Link>
-            </p>
           </div>
         </div>
       </div>

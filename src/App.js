@@ -8,6 +8,8 @@ import Login from "./Components/Login";
 import SearchPage from "./Components/SearchPage";
 import BookData from "./utils/BookData";
 import Requests from "./Components/Requests";
+import Student from "./Components/Student";
+import StudentRegistration from "./Components/StudentRegistration";
 
 function App() {
   const router = createBrowserRouter([
@@ -42,6 +44,14 @@ function App() {
         {
           path: "/requests",
           element: <Requests />,
+        },
+        {
+          path: "/Student",
+          element: <Student />,
+        },
+        {
+          path: "/StudentRegistration",
+          element: <StudentRegistration />,
         },
       ],
     },
