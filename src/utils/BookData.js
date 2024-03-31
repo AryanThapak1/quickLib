@@ -29,7 +29,7 @@ const BookData = (props) => {
 
   const onIssueHandler = async () => {
     const response = await fetch(
-      `${BASE_URL}/v1/issueBook/requestBook?id=${id}`,
+      `${BASE_URL}/api/v1/issueBook/requestBook?id=${id}`,
       {
         method: "POST",
         headers: {
