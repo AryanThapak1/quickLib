@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import BASE_URL from "./Constant";
 
 const Request = (props) => {
-  const { role, book, email } = props;
+  const { id,role, book, email } = props;
   const token = sessionStorage.getItem("token");
   const [requestStatus, setRequestStatus] = useState("Pending"); // Initial request status
 
   const requestHandler = async (action) => {
     const status = action;
     const response = await fetch(
-      `${BASE_URL}/api/v1/issueBook/Approve`,
+      `${BASE_URL}/api/v1/issueBook/Approve?id=${id}`,
       {
         method: "POST",
         body: JSON.stringify({ email, status, book }),
