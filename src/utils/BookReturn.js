@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import BASE_URL from "./Constant";
 
 const BookReturn = (props) => {
   const { book, returnTime, issueTime, id } = props;
@@ -19,7 +20,7 @@ const BookReturn = (props) => {
   const returnHandler = async () => {
     setWrong(false);
     const response = await fetch(
-      `http://localhost:8000/api/v1/issuedBooks/return?id=${id}`,
+      `${BASE_URL}/api/v1/issuedBooks/return?id=${id}`,
       {
         method: "POST",
         body:JSON.stringify({Fine:fine}),

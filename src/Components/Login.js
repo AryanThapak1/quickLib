@@ -3,6 +3,7 @@ import image from "./../Items/QuickLib logo1.png";
 import sideImage from "./../Items/Mobile login-amico.png";
 import Input from "../utils/Input";
 import { useRef, useState } from "react";
+import BASE_URL from "../utils/Constant";
 export default function Login() {
   const [wrongPassword, setWrongPassword] = useState(false);
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ export default function Login() {
       password: PasswordRef.current.value,
     };
 
-    const response = await fetch("http://localhost:8000/api/v1/user/login", {
+    const response = await fetch(`${BASE_URL}/api/v1/user/login`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

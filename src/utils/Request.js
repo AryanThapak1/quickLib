@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import BASE_URL from "./Constant";
 
 const Request = (props) => {
   const { role, book, email } = props;
@@ -8,7 +9,7 @@ const Request = (props) => {
   const requestHandler = async (action) => {
     const status = action;
     const response = await fetch(
-      `http://localhost:8000/api/v1/issueBook/Approve`,
+      `${BASE_URL}/api/v1/issueBook/Approve`,
       {
         method: "POST",
         body: JSON.stringify({ email, status, book }),

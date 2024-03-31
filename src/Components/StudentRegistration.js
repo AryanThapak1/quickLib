@@ -3,6 +3,7 @@ import sideImage from "./../Items/6310507.jpg";
 import Input from "../utils/Input";
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import BASE_URL from "../utils/Constant";
 
 export default function StudentRegistration() {
   const formTags = [
@@ -63,7 +64,7 @@ export default function StudentRegistration() {
       return;
     }
 
-    const response = await fetch("http://localhost:8000/api/v1/user/Signup", {
+    const response = await fetch(`${BASE_URL}/api/v1/user/Signup`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

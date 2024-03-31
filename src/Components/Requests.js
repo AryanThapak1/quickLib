@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Request from "../utils/Request";
+import BASE_URL from "../utils/Constant";
 
 const Requests = () => {
   const [requests, setRequests] = useState([]);
@@ -12,7 +13,7 @@ const Requests = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "http://localhost:8000/api/v1/issueBook/checkRequests",
+        `${BASE_URL}/api/v1/issueBook/checkRequests`,
         {
           method: "GET",
           headers: {

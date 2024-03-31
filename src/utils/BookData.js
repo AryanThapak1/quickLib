@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import image from "../Items/download.png";
+import BASE_URL from "./Constant";
 
 const BookData = (props) => {
   const [bookDetails, setDetails] = useState({});
@@ -13,7 +14,7 @@ const BookData = (props) => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `http://localhost:8000/api/v1/books/Search?id=${id}`
+        `${BASE_URL}/api/v1/books/Search?id=${id}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch book data");

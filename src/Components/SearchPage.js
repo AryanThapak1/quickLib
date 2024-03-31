@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from "react";
 import Book from "../utils/Book";
+import BASE_URL from "../utils/Constant";
 
 const SearchPage = () => {
   const searchRef = useRef();
   let allBooks;
   const [Books, setBooks] = useState([]);
   const fetchData=async ()=>{
-    const response=await fetch("http://localhost:8000/api/v1/Books")
+    const response=await fetch(`${BASE_URL}/api/v1/Books`)
     const data=await response.json();
     setBooks(data);
     allBooks=data;

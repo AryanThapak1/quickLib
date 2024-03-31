@@ -1,6 +1,7 @@
 import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import BookReturn from "../utils/BookReturn";
+import BASE_URL from "../utils/Constant";
 
 const Student = () => {
   const token = sessionStorage.getItem("token");
@@ -12,7 +13,7 @@ const Student = () => {
     setStudentData([]);
     event.preventDefault();
     const enrollment_No = searchRef.current.value;
-    const response = await fetch("http://localhost:8000/api/v1/issuedBooks", {
+    const response = await fetch(`${BASE_URL}/api/v1/issuedBooks`, {
       method: "POST",
       body: JSON.stringify({ enrollment_No }),
       headers: {

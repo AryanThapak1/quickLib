@@ -3,6 +3,7 @@ import sideImage from "./../Items/6310507.jpg";
 import Input from "../utils/Input";
 import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import BASE_URL from "../utils/Constant";
 
 export default function Signup() {
   const formTags = [
@@ -11,6 +12,7 @@ export default function Signup() {
     "Password",
     "Confirm Password",
     "College",
+    "Library ID"
   ];
 
   const navigate = useNavigate();
@@ -21,13 +23,14 @@ export default function Signup() {
   const collegeRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
-
+  const LibraryIDRef=useRef()
   const refs = {
     fullname: nameRef,
     email: emailRef,
     college: collegeRef,
     password: passwordRef,
     confirmpassword: confirmPasswordRef,
+    libraryid:LibraryIDRef
   };
 
   const onSubmitHandler = async (event) => {
@@ -38,6 +41,7 @@ export default function Signup() {
       password: passwordRef.current.value,
       college: collegeRef.current.value,
       role: "Admin",
+      Enrollment_Number:LibraryIDRef.current.value
     };
 
     if (data.password.length < 8) {
@@ -51,7 +55,7 @@ export default function Signup() {
       return;
     }
 
-    const response = await fetch("http://localhost:8000/api/v1/user/Signup", {
+    const response = await fetch(`${BASE_URL}/api/v1/user/Signup`, {
       method: "POST",
       body: JSON.stringify(data),
       headers: {

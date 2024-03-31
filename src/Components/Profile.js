@@ -1,3 +1,4 @@
+import BASE_URL from "../utils/Constant";
 import MiniProfile from "../utils/MiniProfile";
 import image from "./../Items/account.png";
 import { useEffect, useState } from "react";
@@ -15,7 +16,7 @@ export default function Profile() {
  
   const token = sessionStorage.getItem("token");
   const fetchData = async () => {
-    const response = await fetch("http://localhost:8000/api/v1/user/profile", {
+    const response = await fetch(`${BASE_URL}/api/v1/user/profile`, {
       method: "GET",
       headers: {
         Authentication: `Bearer ${token}`

@@ -10,6 +10,8 @@ import BookData from "./utils/BookData";
 import Requests from "./Components/Requests";
 import Student from "./Components/Student";
 import StudentRegistration from "./Components/StudentRegistration";
+import Dashboard from "./Components/Dashboard";
+import { loader as Authchecker } from "./utils/AuthChecker";
 
 function App() {
   const router = createBrowserRouter([
@@ -18,12 +20,13 @@ function App() {
       element: <Root />,
       children: [
         {
-          path: "profile",
-          element: <Profile />,
+          path: "/",
+          element: <HomePage />,
         },
         {
-          path: "Home",
-          element: <HomePage />,
+          path: "profile",
+          element: <Profile />,
+          loader: Authchecker,
         },
         {
           path: "Login",
@@ -36,22 +39,31 @@ function App() {
         {
           path: "Search-Book",
           element: <SearchPage />,
+          loader: Authchecker,
         },
         {
           path: "Search-Book/:id",
           element: <BookData />,
+          loader: Authchecker,
         },
         {
           path: "/requests",
           element: <Requests />,
+          loader: Authchecker,
         },
         {
           path: "/Student",
           element: <Student />,
+          loader: Authchecker,
         },
         {
           path: "/StudentRegistration",
           element: <StudentRegistration />,
+        },
+        {
+          path: "/Dashboard",
+          element: <Dashboard />,
+          loader: Authchecker,
         },
       ],
     },
