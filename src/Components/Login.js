@@ -26,17 +26,16 @@ export default function Login() {
       },
     });
 
-
     if (!response.ok) {
       setWrongPassword(true);
       return;
     }
 
-    const processedData=await response.json();
-    const token=processedData.token;
-    const role=processedData.role;
-    sessionStorage.setItem('token',token);
-    sessionStorage.setItem('role',role);
+    const processedData = await response.json();
+    const token = processedData.token;
+    const role = processedData.role;
+    sessionStorage.setItem("token", token);
+    sessionStorage.setItem("role", role);
 
     setTimeout(() => {
       navigate("/Profile");
@@ -46,7 +45,7 @@ export default function Login() {
     <>
       <div className="flex">
         <div className="w-[50%] hidden md:block">
-          <img src={sideImage} alt='illustration'/>
+          <img src={sideImage} alt="illustration" />
         </div>
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -80,7 +79,7 @@ export default function Login() {
                   </label>
                   <div className="text-sm">
                     <Link
-                      to="Forgot"
+                      to="/Forgot"
                       className="font-semibold text-indigo-600 hover:text-indigo-500"
                     >
                       Forgot password?

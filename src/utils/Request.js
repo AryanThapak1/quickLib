@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import BASE_URL from "./Constant";
+import Button from "./Button";
 
 const Request = (props) => {
-  const { id,role, book, email } = props;
+  const { id, role, book, email, status } = props;
   const token = sessionStorage.getItem("token");
-  const [requestStatus, setRequestStatus] = useState("Pending"); // Initial request status
+  const [requestStatus, setRequestStatus] = useState(status); // Initial request status
 
   const requestHandler = async (action) => {
     const status = action;
@@ -33,33 +34,54 @@ const Request = (props) => {
 
   const onDenyHandler = () => {
     requestHandler("Rejected");
+    props.requestChangeHandler(id);
   };
+
+  const onCollectHandler = () => {
+    requestHandler("Collected");
+    props.requestChangeHandler(id);
+  };
+
+  const notCollectedHandler = () => {
+    requestHandler("Not Collected");
+    props.requestChangeHandler(id);
+  };
+
+  const isStudent = role === "Student";
+  const isAdmin = role === "Admin";
 
   return (
     <div className="max-w-md my-4 p-4 bg-white shadow-lg rounded-lg">
       <div className="text-center">
         <h1 className="text-xl font-bold mb-2 sm:text-lg">Title: {book}</h1>
         <h2 className="text-lg text-gray-700 mb-4">Requested by: {email}</h2>
-        {role === "Admin" && (
+        {isAdmin && (
           <div className="flex justify-center space-x-4">
-            <button
-              className="bg-teal-500 hover:bg-teal-700 text-sm text-white py-2 px-4 rounded"
-              onClick={onApproveHandler}
-            >
-              Approve
-            </button>
-            <button
-              className="bg-red-500 hover:bg-red-700 text-sm text-white py-2 px-4 rounded"
-              onClick={onDenyHandler}
-            >
-              Deny
-            </button>
+            {requestStatus !== "Approved" ? (
+              <>
+                <Button onClick={onApproveHandler} title="Approve" />
+                <Button onClick={onDenyHandler} title="Deny" />
+              </>
+            ) : (
+              <>
+                <Button onClick={onCollectHandler} title="Collect" />
+                <Button onClick={notCollectedHandler} title="Didn't Collect" />
+              </>
+            )}
           </div>
         )}
       </div>
-      <div className="text-center mt-4">
+      <div className="text-center mt-4 font-bold">
         <p>Status: {requestStatus}</p>
       </div>
+      {isStudent && status === "Approved" ? (
+        <p className="text-center mt-2 text-lg text-teal-600">
+          Your Request has been approved please check your email for further
+          instuctions
+        </p>
+      ) : (
+        ""
+      )}
     </div>
   );
 };

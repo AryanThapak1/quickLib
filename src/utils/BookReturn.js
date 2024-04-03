@@ -5,6 +5,7 @@ const BookReturn = (props) => {
   const { book, returnTime, issueTime, id } = props;
   const issueDate = new Date(issueTime);
   const formattedIssueDate = issueDate.toLocaleString();
+  const [newIssueDate, setNewIssueDate] = useState(formattedIssueDate);
   const returnDate = returnTime ? new Date(returnTime) : null;
   const formattedReturnDate = returnDate ? returnDate.toLocaleString() : "";
   const [fine, setFine] = useState(0);
@@ -17,16 +18,31 @@ const BookReturn = (props) => {
     setFine(currentFine);
   };
 
+  const reIssueBookHandler = async () => {
+    const response = await fetch(
+      `${BASE_URL}/api/v1/issuedBooks/reIssueBook?id=${id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    const data = await response.json();
+    let newFormmatedIssueDate = new Date(data.issueTime).toLocaleString();
+    setNewIssueDate(newFormmatedIssueDate);
+  };
   const returnHandler = async () => {
     setWrong(false);
     const response = await fetch(
       `${BASE_URL}/api/v1/issuedBooks/return?id=${id}`,
       {
         method: "POST",
-        body:JSON.stringify({Fine:fine}),
-        headers:{
-            "Content-Type":"application/json"
-        }
+        body: JSON.stringify({ Fine: fine }),
+        headers: {
+          "Content-Type": "application/json",
+        },
       }
     );
 
@@ -46,19 +62,27 @@ const BookReturn = (props) => {
       <div className="text-center">
         <h1 className="text-xl font-bold mb-2">Book: {book}</h1>
         <h2 className="text-lg text-gray-700 mb-4">
-          Issue Date: {formattedIssueDate}
+          Issue Date: {newIssueDate}
         </h2>
         <h2 className="text-lg text-gray-700 mb-4">
           Return Date: {formattedReturnDate}
         </h2>
         <h2 className="text-lg text-gray-700 mb-4">Fine: {fine} Rs</h2>
         {!returnDate && !returned ? (
-          <button
-            className="bg-teal-500 hover:bg-teal-700 text-sm text-white py-2 px-4 rounded"
-            onClick={returnHandler}
-          >
-            Return
-          </button>
+          <div className="flex gap-4 items-center justify-center">
+            <button
+              className="bg-teal-500 hover:bg-teal-700 text-sm text-white py-2 px-4 rounded"
+              onClick={returnHandler}
+            >
+              Return
+            </button>
+            <button
+              className="bg-teal-500 hover:bg-teal-700 text-sm text-white py-2 px-4 rounded"
+              onClick={reIssueBookHandler}
+            >
+              Reissue
+            </button>
+          </div>
         ) : (
           <p>{returned ? "Returned" : ""}</p>
         )}

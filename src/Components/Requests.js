@@ -10,6 +10,10 @@ const Requests = () => {
     fetchData();
   }, []);
 
+  const requestChangeHandler = (id) => {
+    setRequests((prevRequests) => prevRequests.filter((el) => el.id !== id))
+  };
+
   const fetchData = async () => {
     try {
       const response = await fetch(
@@ -29,15 +33,21 @@ const Requests = () => {
     }
   };
 
+  const noPendingRequests = requests.length === 0;
   return (
     <div className="flex flex-col items-center">
+      {noPendingRequests && (
+        <h1 className="text-xl font-bold">No Pending Requests</h1>
+      )}
       {requests.map((request) => (
         <Request
           key={request._id}
           email={request.email}
           book={request.book}
           id={request._id}
+          status={request.status}
           role={role}
+          requestChangeHandler={requestChangeHandler}
         />
       ))}
     </div>

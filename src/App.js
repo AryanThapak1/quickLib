@@ -12,6 +12,7 @@ import Student from "./Components/Student";
 import StudentRegistration from "./Components/StudentRegistration";
 import Dashboard from "./Components/Dashboard";
 import { loader as Authchecker } from "./utils/AuthChecker";
+import ForgotPassword from "./Components/ForgotPassword";
 
 function App() {
   const router = createBrowserRouter([
@@ -35,6 +36,10 @@ function App() {
         {
           path: "Signup",
           element: <Signup />,
+        },
+        {
+          path:"Forgot",
+          element:<ForgotPassword/>
         },
         {
           path: "Search-Book",
