@@ -1,3 +1,3 @@
-// "https://demobackend-omega.vercel.app"
+// "https://lbbackend.vercel.app"
 const BASE_URL = "https://lbbackend.vercel.app";
 export default BASE_URL;
