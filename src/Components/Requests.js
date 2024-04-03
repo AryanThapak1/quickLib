@@ -11,7 +11,9 @@ const Requests = () => {
   }, []);
 
   const requestChangeHandler = (id) => {
-    setRequests((prevRequests) => prevRequests.filter((el) => el.id !== id))
+    console.log("before clickin ", requests);
+    setRequests((prevRequests) => prevRequests.filter((el) => el._id !== id));
+    console.log(requests);
   };
 
   const fetchData = async () => {
