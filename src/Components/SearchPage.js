@@ -4,13 +4,13 @@ import BASE_URL from "../utils/Constant";
 
 const SearchPage = () => {
   const searchRef = useRef();
-  let allBooks;
+  const [allBooks,setAllBooks]=useState();
   const [Books, setBooks] = useState([]);
   const fetchData=async ()=>{
     const response=await fetch(`${BASE_URL}/api/v1/Books`)
     const data=await response.json();
     setBooks(data);
-    allBooks=data;
+    setAllBooks(data);
   }
   const searchHandler = (event) => {
     event.preventDefault();
@@ -19,10 +19,11 @@ const SearchPage = () => {
       setBooks(allBooks);
       return;
     }
-    const filteredData = Books.filter((el) => {
+    const books=allBooks;
+    const filteredData = books.filter((el) => {
       return el.Name.includes(searchTerm);
     });
-
+  
     setBooks(filteredData);
   };
 
