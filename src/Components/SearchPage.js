@@ -21,7 +21,7 @@ const SearchPage = () => {
     }
     const books=allBooks;
     const filteredData = books.filter((el) => {
-      return el.Name.includes(searchTerm);
+      return el.Name.toLowerCase().includes(searchTerm.toLowerCase());
     });
   
     setBooks(filteredData);
